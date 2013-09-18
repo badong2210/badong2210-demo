@@ -3,7 +3,7 @@ badong2210-demo
 
 ### Introduction
 
-Sample project using the following: maven, spring, hibernate, carbon5
+Sample project using the following: maven, spring, hibernate and carbon5
 
 ## License
 
