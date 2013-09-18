@@ -15,7 +15,6 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>badong2210-demo</name>
-  <url>http://www.badong2210.org/</url>
 
   <scm>
     <connection>scm:git:https://github.com/badong2210/badong2210-demo.git</connection>
