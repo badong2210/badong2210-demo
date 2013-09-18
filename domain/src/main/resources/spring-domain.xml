@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-lazy-init="false" default-dependency-check="none"
+       default-autowire="no">
+
+  <import resource="classpath:spring-domain-datalayer.xml"/>
+
+  <bean id="abstractTxBean"
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+        abstract="true">
+    <property name="transactionManager" ref="transactionManager"/>
+    <property name="transactionAttributeSource">
+      <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+    </property>
+  </bean>
+
+  <bean id="accountManagementService" parent="abstractTxBean">
+    <property name="target">
+      <bean class="org.badong2210.demo.domain.service.AccountManagementServiceImpl">
+        <property name="mapper" ref="dozer"/>
+        <property name="accountDao" ref="accountDao"/>
+      </bean>
+    </property>
+  </bean>
+</beans>

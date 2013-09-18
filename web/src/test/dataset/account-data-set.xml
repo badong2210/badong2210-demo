@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<dataset>
+  <table name="account">
+    <column>id</column>
+    <column>version</column>
+    <column>created_by</column>
+    <column>created_time</column>
+    <column>last_updated_by</column>
+    <column>last_updated_time</column>
+    <column>name</column>
+    <column>session_id</column>
+    <column>activation_code</column>
+    <column>description</column>
+    <column>status</column>
+    <row>
+      <value>1</value>
+      <value>0</value>
+      <value>system</value>
+      <value>2012-09-20 08:50:00</value>
+      <value>system</value>
+      <value>2012-09-20 08:55:00</value>
+      <value>account1</value>
+      <value>session1</value>
+      <value>code1</value>
+      <value>account1 description</value>
+      <value>INACTIVE</value>
+    </row>
+    <row>
+      <value>2</value>
+      <value>0</value>
+      <value>system</value>
+      <value>2012-09-20 08:50:00</value>
+      <value>system</value>
+      <value>2012-09-20 08:55:00</value>
+      <value>account2</value>
+      <value>session1</value>
+      <value>code2</value>
+      <value>account2 description</value>
+      <value>INACTIVE</value>
+    </row>
+    <row>
+      <value>3</value>
+      <value>0</value>
+      <value>system</value>
+      <value>2012-09-20 08:50:00</value>
+      <value>system</value>
+      <value>2012-09-20 08:55:00</value>
+      <value>account3</value>
+      <value>session2</value>
+      <value>code3</value>
+      <value>account3 description</value>
+      <value>INACTIVE</value>
+    </row>
+  </table>
+</dataset>

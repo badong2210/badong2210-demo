@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+       default-lazy-init="false" default-dependency-check="none"
+       default-autowire="no">
+
+  <aop:config proxy-target-class="true"/>
+
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location" value="classpath:sample-db-inmemory.properties"/>
+  </bean>
+
+  <bean id="dbUnitDataTypeFactory" class="${dbunit.dataTypeFactory}" scope="prototype"/>
+  <bean id="dbUnitMetadataHandler" class="${dbunit.metadataHandler}" scope="prototype"/>
+
+  <bean id="dozer" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+    <property name="mappingFiles">
+      <list>
+        <value>classpath:enum-string.converter.dozer.xml</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="testContext" class="java.lang.Boolean" factory-method="valueOf">
+    <constructor-arg value="true" type="java.lang.String"/>
+  </bean>
+
+  <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="url" value="${dataSource.sample.url}"/>
+    <property name="username" value="${dataSource.sample.username}"/>
+    <property name="password" value="${dataSource.sample.password}"/>
+    <property name="driverClassName" value="${dataSource.driverClassName}"/>
+    <property name="validationQuery" value="${dataSource.pool.validationQuery}"/>
+    <property name="defaultAutoCommit" value="false"/>
+    <property name="maxActive" value="8"/>
+    <property name="maxWait" value="10000"/>
+    <property name="maxOpenPreparedStatements" value="20"/>
+    <property name="poolPreparedStatements" value="false"/>
+    <property name="initialSize" value="1"/>
+    <property name="accessToUnderlyingConnectionAllowed" value="1"/>
+
+    <property name="testOnBorrow" value="true"/>
+    <property name="testOnReturn" value="false"/>
+    <property name="testWhileIdle" value="true"/>
+
+    <property name="minIdle" value="0"/>
+    <property name="maxIdle" value="1"/>
+
+    <!-- Idle connections are checked every 10 seconds -->
+    <property name="timeBetweenEvictionRunsMillis" value="10000"/>
+    <!-- Idle connections live for 10 seconds before being closed -->
+    <property name="minEvictableIdleTimeMillis" value="10000"/>
+    <property name="numTestsPerEvictionRun" value="8"/>
+  </bean>
+
+
+  <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+        <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+        <prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
+        <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+        <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+        <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+        <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+        <prop key="hibernate.hibernate.query.substitutions">${hibernate.hibernate.query.substitutions}</prop>
+      </props>
+    </property>
+    <!-- Scan for entities and mappings -->
+    <property name="packagesToScan">
+      <list>
+        <value>org.badong2210.core.sample.beans</value>
+      </list>
+    </property>
+
+  </bean>
+
+  <bean id="baseDao" class="org.badong2210.core.dao.BaseDaoImpl"
+        abstract="true">
+    <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    <property name="jdbcTemplate" ref="jdbcTemplate"/>
+  </bean>
+
+  <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="nestedTransactionAllowed" value="true"/>
+    <property name="earlyFlushBeforeCommit" value="true"/>
+  </bean>
+
+  <alias name="transactionManager" alias="carbonFiveTransactionManager"/>
+
+  <!-- Enable Annotation-based transaction management: -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+  <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <bean id="migrationResolver" class="org.badong2210.core.dbmigrator.DefaultResourceMigrationResolver"/>
+  <bean id="versionStrategy" class="com.carbonfive.db.migration.SimpleVersionStrategy"/>
+
+  <!--  DB Migrations setup for delivery_* tables. -->
+  <bean id="migrationManager" class="org.badong2210.core.dbmigrator.DataSourceMigrationManager"
+        init-method="migrate">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="migrationResolver" ref="migrationResolver"/>
+    <property name="versionStrategy" ref="versionStrategy"/>
+    <property name="domain" value="sample"/>
+    <property name="forceMigrate" ref="testContext"/>
+  </bean>
+
+  <bean id="audienceSchemeDao" class="org.badong2210.core.sample.dao.TestEntityDaoImpl"
+        parent="baseDao"/>
+
+</beans>

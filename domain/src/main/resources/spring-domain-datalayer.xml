@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-lazy-init="false" default-dependency-check="none"
+       default-autowire="no">
+
+  <bean id="migrationResolver" class="org.badong2210.core.dbmigrator.DefaultResourceMigrationResolver"/>
+  <bean id="versionStrategy" class="com.carbonfive.db.migration.SimpleVersionStrategy"/>
+
+  <bean id="migrationManager" class="org.badong2210.core.dbmigrator.DataSourceMigrationManager"
+        init-method="migrate">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="migrationResolver" ref="migrationResolver"/>
+    <property name="versionStrategy" ref="versionStrategy"/>
+    <property name="domain" value="badong2210"/>
+    <property name="forceMigrate" value="true"/>
+  </bean>
+
+  <bean id="accountDao" class="org.badong2210.demo.domain.dao.AccountDaoImpl"
+        parent="baseDao"/>
+
+</beans>
