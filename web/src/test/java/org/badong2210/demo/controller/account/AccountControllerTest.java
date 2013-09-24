@@ -1,5 +1,6 @@
 package org.badong2210.demo.controller.account;
 
+import org.badong2210.demo.domain.vo.AccountVO;
 import org.junit.Test;
 import org.badong2210.core.carbonfive.Carbon5AbstractDataDrivenTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,18 @@ public class AccountControllerTest extends Carbon5AbstractDataDrivenTest {
 
     @Autowired
     private AccountController controller;
+
+    @Test
+    public void testAddAccount() {
+        AccountVO vo = new AccountVO();
+        vo.setName("shiela");
+        vo.setDescription("description");
+        controller.add(vo,"session4");
+
+        AccountListResponse responseSession4 = controller.list("session4");
+        assertEquals(responseSession4.getRows().size(), 1);
+    }
+
 
     @Test
     public void testDataSet() {

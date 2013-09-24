@@ -18,10 +18,12 @@
     <tiles.version>2.2.2</tiles.version>
     <jackson.version>1.9.0</jackson.version>
     <jstl.version>1.1.2</jstl.version>
+    <piraso.version>1.1-SNAPSHOT</piraso.version>
     <java-diff-utils.version>1.2.1</java-diff-utils.version>
     <apache-poi.version>3.8</apache-poi.version>
     <slf4j-log4j12.version>1.5.8</slf4j-log4j12.version>
     <badong2210.version>1.1-SNAPSHOT</badong2210.version>
+    <jbehave.version>3.5.4</jbehave.version>
     <war.name>demo-web</war.name>
   </properties>
 
@@ -58,6 +60,7 @@
         <filtering>true</filtering>
         <includes>
           <include>**/*.xml</include>
+          <include>**/*.story</include>
         </includes>
       </testResource>
       <testResource>
@@ -78,6 +81,48 @@
       </testResource>
     </testResources>
   </build>
+
+  <profiles>
+    <profile>
+      <id>badong2210</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.piraso</groupId>
+            <artifactId>piraso-maven-plugin</artifactId>
+            <version>${piraso.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>web-xml</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+        <dependency>
+          <groupId>org.piraso</groupId>
+          <artifactId>piraso-web-server</artifactId>
+          <version>${piraso.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.piraso</groupId>
+          <artifactId>log4j-context-logger-server</artifactId>
+          <version>${piraso.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.piraso</groupId>
+          <artifactId>sql-context-logger-server</artifactId>
+          <version>${piraso.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
   <dependencies>
     <dependency>
@@ -246,6 +291,23 @@
       <groupId>org.badong2210</groupId>
       <artifactId>badong2210-demo-domain</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jbehave</groupId>
+      <artifactId>jbehave-core</artifactId>
+      <version>3.5.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jbehave</groupId>
+      <artifactId>jbehave-spring</artifactId>
+      <version>3.5.4</version>
     </dependency>
   </dependencies>
 </project>

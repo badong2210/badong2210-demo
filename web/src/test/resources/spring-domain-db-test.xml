@@ -10,6 +10,7 @@
 
   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="location" value="classpath:db-inmemory.properties"/>
+    <!--property name="location" value="classpath:mysql.properties"/-->
   </bean>
 
   <bean id="dbUnitDataTypeFactory" class="${dbunit.dataTypeFactory}" scope="prototype"/>
