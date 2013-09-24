@@ -34,48 +34,6 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <profiles>
-    <profile>
-      <id>badong2210</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.piraso</groupId>
-            <artifactId>piraso-maven-plugin</artifactId>
-            <version>${piraso.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>web-xml</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <dependencies>
-        <dependency>
-          <groupId>org.piraso</groupId>
-          <artifactId>piraso-web-server</artifactId>
-          <version>${piraso.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.piraso</groupId>
-          <artifactId>log4j-context-logger-server</artifactId>
-          <version>${piraso.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.piraso</groupId>
-          <artifactId>sql-context-logger-server</artifactId>
-          <version>${piraso.version}</version>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
-
   <build>
     <finalName>${war.name}</finalName>
     <resources>
