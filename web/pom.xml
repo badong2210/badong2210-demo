@@ -18,7 +18,6 @@
     <tiles.version>2.2.2</tiles.version>
     <jackson.version>1.9.0</jackson.version>
     <jstl.version>1.1.2</jstl.version>
-    <piraso.version>1.1-SNAPSHOT</piraso.version>
     <java-diff-utils.version>1.2.1</java-diff-utils.version>
     <apache-poi.version>3.8</apache-poi.version>
     <slf4j-log4j12.version>1.5.8</slf4j-log4j12.version>
