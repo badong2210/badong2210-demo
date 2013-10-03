@@ -51,6 +51,10 @@
       <name>Carbonfive Releases Repository</name>
       <url>http://mvn.carbonfive.com/public/</url>
     </repository>
+    <repository>
+      <id>cukes</id>
+      <url>http://cukes.info/maven</url>
+    </repository>
   </repositories>
 
   <properties>
