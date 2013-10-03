@@ -3,7 +3,7 @@ Narrative: Account Controller creates an account
 Scenario: Creating an account
 
 Given the account is available
-When the account name is Shiela with description Pretty
+When the account name is Shiela with description desc1
 the account should be added and return SUCCESS
 
 
@@ -18,5 +18,5 @@ Then the account should be added and return SUCCESS
 
 Examples:
 |account_name|account_description|
-|shiela      | desc1             |
-|bernard     | desc2             |
+|dodong      | desc2             |
+|bernard     | desc3             |
