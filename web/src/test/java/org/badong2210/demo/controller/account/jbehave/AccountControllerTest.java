@@ -1,5 +1,7 @@
-package org.badong2210.demo.controller.account;
+package org.badong2210.demo.controller.account.jbehave;
 
+import org.badong2210.demo.controller.account.AccountController;
+import org.badong2210.demo.controller.account.AccountListResponse;
 import org.badong2210.demo.domain.vo.AccountVO;
 import org.junit.Test;
 import org.badong2210.core.carbonfive.Carbon5AbstractDataDrivenTest;

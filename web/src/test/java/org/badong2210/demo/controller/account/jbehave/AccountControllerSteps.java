@@ -1,5 +1,7 @@
-package org.badong2210.demo.controller.account;
+package org.badong2210.demo.controller.account.jbehave;
 
+import org.badong2210.demo.controller.account.AccountController;
+import org.badong2210.demo.controller.account.StatusResponse;
 import org.badong2210.demo.domain.vo.AccountVO;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;

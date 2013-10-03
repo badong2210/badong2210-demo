@@ -10,5 +10,5 @@
 
   <import resource="spring-domain-db-test.xml" />
 
-  <bean class="org.badong2210.demo.controller.account.AccountControllerSteps"/>
+  <bean class="org.badong2210.demo.controller.account.jbehave.AccountControllerSteps"/>
 </beans>

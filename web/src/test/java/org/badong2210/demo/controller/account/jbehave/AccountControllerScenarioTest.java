@@ -1,4 +1,4 @@
-package org.badong2210.demo.controller.account;
+package org.badong2210.demo.controller.account.jbehave;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
