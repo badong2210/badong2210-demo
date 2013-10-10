@@ -1,6 +1,6 @@
 package org.badong2210.core.dbmigrator;
 
-import org.badong2210.core.carbonfive.Carbon5AbstractDataDrivenTest;
+import org.badong2210.core.carbonfive.AbstractTransactionalJunit4DataDrivenTest;
 import org.badong2210.core.sample.beans.TestEntity;
 import org.badong2210.core.sample.dao.TestEntityDao;
 import org.junit.Test;
@@ -13,9 +13,9 @@ import static junit.framework.Assert.assertNotNull;
 /**
  * Test for {@link DataSourceMigrationManager} class.
  */
-@Carbon5AbstractDataDrivenTest.DataSet(locations = "dataset/test-entity-set.xml")
+@AbstractTransactionalJunit4DataDrivenTest.DataSet(locations = "dataset/test-entity-set.xml")
 @ContextConfiguration(locations = { "classpath:spring-db.xml" })
-public class DataSourceMigrationManagerTest extends Carbon5AbstractDataDrivenTest {
+public class DataSourceMigrationManagerTest extends AbstractTransactionalJunit4DataDrivenTest {
 
     @Autowired
     private TestEntityDao dao;

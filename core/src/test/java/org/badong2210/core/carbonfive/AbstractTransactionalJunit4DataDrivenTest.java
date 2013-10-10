@@ -37,7 +37,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "carbonFiveTransactionManager", defaultRollback = true)
 @Transactional(rollbackFor = Exception.class)
-public abstract class Carbon5AbstractDataDrivenTest extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class AbstractTransactionalJunit4DataDrivenTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Resource(name = "&sessionFactory")
     protected LocalSessionFactoryBean hibernateSessionFactory;

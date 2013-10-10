@@ -1,6 +1,6 @@
 package org.badong2210.demo.domain.service;
 
-import org.badong2210.core.carbonfive.Carbon5AbstractDataDrivenTest;
+import org.badong2210.core.carbonfive.AbstractTransactionalJunit4DataDrivenTest;
 import org.badong2210.demo.domain.vo.AccountVO;
 import org.badong2210.demo.domain.vo.AccountVOBuilder;
 import org.junit.Test;
@@ -16,9 +16,9 @@ import static org.hamcrest.Matchers.is;
 /**
  * Test for {@link AccountManagementServiceImpl} class.
  */
-@Carbon5AbstractDataDrivenTest.DataSet(locations = {"dataset/account-data-set.xml"})
+@AbstractTransactionalJunit4DataDrivenTest.DataSet(locations = {"dataset/account-data-set.xml"})
 @ContextConfiguration(locations = { "classpath:spring-domain-db-test.xml" })
-public class AccountManagementServiceImplTest extends Carbon5AbstractDataDrivenTest {
+public class AccountManagementServiceImplTest extends AbstractTransactionalJunit4DataDrivenTest {
 
     @Autowired
     private AccountManagementService service;
